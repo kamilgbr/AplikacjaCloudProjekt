@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Projekt1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TruckDetail">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarDetails" Type="varchar" MaxLength="50" />
+          <Property Name="CarBrandID" Type="int" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TruckRefBrands">
+          <Key>
+            <PropertyRef Name="CarRefBrandID" />
+          </Key>
+          <Property Name="CarRefBrandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarRefBrandName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__TruckDeta__CarBr__34C8D9D1">
+          <End Role="TruckRefBrands" Type="Self.TruckRefBrands" Multiplicity="0..1" />
+          <End Role="TruckDetail" Type="Self.TruckDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckRefBrands">
+              <PropertyRef Name="CarRefBrandID" />
+            </Principal>
+            <Dependent Role="TruckDetail">
+              <PropertyRef Name="CarBrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Projekt1ModelStoreContainer">
+          <EntitySet Name="TruckDetail" EntityType="Self.TruckDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TruckRefBrands" EntityType="Self.TruckRefBrands" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TruckDeta__CarBr__34C8D9D1" Association="Self.FK__TruckDeta__CarBr__34C8D9D1">
+            <End Role="TruckRefBrands" EntitySet="TruckRefBrands" />
+            <End Role="TruckDetail" EntitySet="TruckDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Projekt1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TruckDetail">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarBrandID" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TruckRefBrands" Relationship="Self.FK__TruckDeta__CarBr__34C8D9D1" FromRole="TruckDetail" ToRole="TruckRefBrands" />
+        </EntityType>
+        <EntityType Name="TruckRefBrands">
+          <Key>
+            <PropertyRef Name="CarRefBrandID" />
+          </Key>
+          <Property Name="CarRefBrandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarRefBrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TruckDetail" Relationship="Self.FK__TruckDeta__CarBr__34C8D9D1" FromRole="TruckRefBrands" ToRole="TruckDetail" />
+        </EntityType>
+        <Association Name="FK__TruckDeta__CarBr__34C8D9D1">
+          <End Role="TruckRefBrands" Type="Self.TruckRefBrands" Multiplicity="0..1" />
+          <End Role="TruckDetail" Type="Self.TruckDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TruckRefBrands">
+              <PropertyRef Name="CarRefBrandID" />
+            </Principal>
+            <Dependent Role="TruckDetail">
+              <PropertyRef Name="CarBrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Projekt1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TruckDetail" EntityType="Self.TruckDetail" />
+          <EntitySet Name="TruckRefBrands" EntityType="Self.TruckRefBrands" />
+          <AssociationSet Name="FK__TruckDeta__CarBr__34C8D9D1" Association="Self.FK__TruckDeta__CarBr__34C8D9D1">
+            <End Role="TruckRefBrands" EntitySet="TruckRefBrands" />
+            <End Role="TruckDetail" EntitySet="TruckDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Projekt1ModelStoreContainer" CdmEntityContainer="Projekt1Entities1">
+          <EntitySetMapping Name="TruckDetail">
+            <EntityTypeMapping TypeName="Projekt1Model.TruckDetail">
+              <MappingFragment StoreEntitySet="TruckDetail">
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="CarDetails" ColumnName="CarDetails" />
+                <ScalarProperty Name="CarBrandID" ColumnName="CarBrandID" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TruckRefBrands">
+            <EntityTypeMapping TypeName="Projekt1Model.TruckRefBrands">
+              <MappingFragment StoreEntitySet="TruckRefBrands">
+                <ScalarProperty Name="CarRefBrandID" ColumnName="CarRefBrandID" />
+                <ScalarProperty Name="CarRefBrandName" ColumnName="CarRefBrandName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
