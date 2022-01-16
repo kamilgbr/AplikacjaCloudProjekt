@@ -1,6 +1,6 @@
 # AplikacjaCloudProjekt
 # Aplikacja została stworzona na potrzeby przedmiotu 'Przetwarzanie w chmurach obliczeniowych'.
-Środowisko: Visual Studio 2022
+Środowisko: Visual Studio 2022, Microsoft Azure
 
 
 Technologie: C# , JavaScript, HTML 
